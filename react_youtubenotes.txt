@@ -1,0 +1,1007 @@
+=>react is a javascript library used to develop UI      component.
+////Javascript fundamental concepts////
+1) variable declaration
+  
+var key is used to declare a variable
+example:
+var name='sannith'
+console.log(name)
+
+2)datatypes
+
+number,string,boolean,undefined
+
+var data=1
+console.log(typeof data)
+output: number
+
+var data=1.5
+console.log(typeof data)
+output: number
+
+var data='hello12124gsgdgg'
+console.log(typeof data)
+output: string
+
+var data=true
+console.log(data)
+output:boolean
+
+var data;
+console.log(data);
+output: undefined
+
+3)arrays
+
+ to store more than one value
+ var data=[1,2,3,4,5]
+ console.log(data)
+output:[1,2,3,4,5]
+
+ var data=[1,2,3,4,5]
+ console.log(data[3])
+output:4
+
+4)objects
+  store the data  in terms of key and value
+or name and value
+
+var data={
+                 name:'sannith',age:24}
+console.log(data.name)
+output:sannith
+
+5)functions
+ function is performing specific task when ever we required
+   
+function user(){
+                       console.log('hello sannith')
+                        }
+user();
+output:hello sannith
+
+function add(num1,num2){
+                                         return  num1+num2
+                                           } 
+var output=add(10,20)
+console.log(output)
+
+6)conditional statements
+
+if ,if else ,if else if else
+
+var marks=85
+if(marks>80)
+{
+  console.log('grade is A')
+}
+
+var marks=70
+if(marks>80)
+{
+  console.log('grade is A')
+}
+else{
+  console.log('grade is B')
+
+}
+
+var marks=65
+if(marks>80)
+{
+  console.log('grade is A')
+}
+else if(marks>60){
+  console.log('grade is B')
+
+}
+else{
+   console.log('grade is C')
+
+}
+
+7) looping concept
+
+for ,while
+
+for(var i=1;i<=5;i++){
+  console.log('print')
+}
+
+var output=0;
+for(var i=1;i<=100;i++){
+  output=output+i
+ 
+  
+}
+ console.log(output)
+
+output:5050
+
+when we dont no exact iteration we will go for while loop
+here iteration continues untill it staisfy condition
+var output=0;
+while(output<=5)
+{
+  console.log('output is ');
+  output++
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////ES5 version////////////////////////
+//array features//
+1) isArray()
+
+   var data=[4,'sdnd nsb',5454,'@##$$'];
+console.log(Array.isArray(data))
+output: true
+
+2) map( )
+   var data=[4,'sdnd nsb',5454,'@##$$'];
+data.map(function(item){console.log(item)})
+data.map((item)=>console.log(item))///ES6
+
+  output:
+   4
+sdnd nsb
+5454
+@##$$
+
+3) filter( )
+var data=[4,7,1,3,7,8];
+var filter=data.filter((item)=> item>6)
+console.log(filter) 
+output:
+(3) [7, 7, 8]
+
+var data=[4,7,1,3,7,8];
+var map=data.map((item)=>item*2)
+var filter=data.filter((item)=> item>6)
+console.log(map)
+console.log(filter)
+
+output:
+ (6) [8, 14, 2, 6, 14, 16]
+(3) [7, 7, 8]
+
+4) forEach( )
+    var data=[4,7,1,3,7,8];
+    data.forEach((item)=>console.log(item*10))
+output:
+ 40
+70
+10
+30
+70
+80
+
+5)every()
+  var data=[4,7,1,3,7,8];
+ var out=data.every((item)=>item>0)
+   console.log(out)
+
+ output: true
+  
+    var data=[4,-7,1,3,7,-8];
+ var out=data.every((item)=>item>0)
+   console.log(out)
+  output: false
+
+6)some( )
+var data=[4,-7,1,3,7,-8];
+ var out=data.some((item)=>item>0)
+   console.log(out)
+  output: true
+
+7) indexOf()
+   var data=[-4,7,1,-3,7,8];
+   console.log(data.indexOf(-3))
+   output:3
+8) lastIndexOf()
+    var data=[-4,7,1,-3,7,8];
+    console.log(data.lastIndexOf(7))
+   output:4
+///jsonfeature///
+1)stingify( )
+    object will be convert to json
+  
+
+var data=[{
+  name:'sanith',
+  age:22
+},
+{
+  name:'reddy',
+  age:24
+}]
+var json=JSON.stringify(data)
+console.log(data)
+console.log(json)
+
+output:
+
+(2) [{...}, {...}]
+0:(2) {name: "sanith", age: 22}
+1:(2) {name: "reddy", age: 24}
+
+[{"name":"sanith","age":22},{"name":"reddy","age":24}]
+
+////datefeature//
+1) valueOf( )
+
+  var date= new Date();
+console.log(date.valueOf())
+output:
+
+shows in milli seconds
+1666942232234
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////ES6 version////////
+1)let and const  keywords
+     
+    var keyword acts like global let act like local can be accesed only inside block
+  {
+ let a=10
+}
+console.log(a)
+output: null
+
+  const var cannot be reassigned
+{
+ const a=10
+  a=30
+ console.log(a)
+}
+output:
+Cannot assign to "a" because it is a constant
+
+2)Arrow Function
+
+es5==>
+function add(){
+  return console.log(10+30)
+}
+es6(arrowfunction)=>
+add=()=>  console.log(10+30)
+
+3)classes
+   class User{
+  login(){
+console.log('logged in success')
+  }
+}
+const obj= new User();
+obj.login()
+output:logged in success
+
+  class User{
+  constructor(msg){
+    this.msg=msg;
+
+  }
+  login(){
+console.log(this.msg)
+  }
+}
+const obj= new User('hii');
+const obj2= new User('welcome');
+obj.login()
+obj2.login()
+
+output:
+
+hii
+welcome
+
+4) For.. of...
+
+  const arr=[1,2,3,4,5,6]
+for(const a of arr){
+  console.log(a*2)
+}
+ output:
+  2
+4
+6
+8
+10
+12
+
+5) Default parameter
+
+ user=(name,age=20)=>{
+  console.log(name+' '+age)
+}
+user('sannith');
+
+output:
+sannith 20
+
+6)Rest Operator
+   user=(name,...remaining)=>{
+  console.log(name+' '+remaining)
+  }
+  user('sannith',25,'cdcxcxcxcxcxc',655);
+
+output:
+sannith 25,cdcxcxcxcxcxc,655
+
+7)Spread operator
+
+   arr1=[1,2,3,4,5]
+arr2=[6,7,8,9,10]
+arr3=[...arr1,...arr2]
+console.log(arr3)
+output:
+
+  (10) [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+8) Destructuring
+    const data=[{
+  name:'sannith',
+  age:22
+},{address:'nzb',
+ phoneno:867676786
+ }
+]
+const [{name,age},{phoneno,address}]=data
+console.log(phoneno)
+
+output:867676786
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////react fundamentals////////////
+
+1)functional compoment
+
+  const App=()=>{
+    const name='sannith';
+    return(
+
+        <div>
+            <center>
+                <h1> welcome {name}</h1>
+            </center>
+        </div>
+    )
+    
+}
+export default App
+
+
+2)class component
+   import React ,{Component}from 'react'
+class App extends Component{
+    render(){
+        let name='sannith'
+        return(
+    
+
+        <div>
+            <center>
+                <h1> welcome {name} </h1>
+            </center>
+        </div>
+    )
+    
+}
+}
+export default App
+
+3) states
+
+    state is used for storing the data in global level
+
+import React ,{Component}from 'react'
+class App extends Component{
+    state={
+        name:'sannith',
+        age:22,
+        data:[1,2,3]
+
+    }
+    render(){
+        
+        return(
+    
+
+        <div>
+            <center>
+                <h1> welcome {this.state.name} </h1>
+                <h2> age : {this.state.age}</h2>
+                <p>{this.state.data}</p>
+            </center>
+        </div>
+    )
+    
+}
+}
+export default App
+
+output:
+welcome sannith
+age : 22
+123
+
+4)props
+   to transfer the data one component to other props is used
+
+import React ,{Component}from 'react'
+import Test from './test'
+class App extends Component{
+    state={
+        name:'santhu',
+        age:22,
+        data:[1,2,3]
+
+    }
+    render(){
+        
+        return(
+    
+
+        <div>
+            <center>
+                
+                <Test name={this.state.name} age={this.state.age} data={this.state.data}/>
+            </center>
+        </div>
+    )
+    
+}
+}
+export default App
+
+////in test.js//
+
+import React ,{Component}from 'react'
+class Test extends Component{
+    
+    render(){
+        
+        return(
+    
+
+        <div>
+            <center>
+                <h1>this is test Component</h1>
+                <h1> welcome {this.props.name} </h1>
+                <h2> age : {this.props.age}</h2>
+                <p>{this.props.data}</p>
+            </center>
+        </div>
+    )
+    
+}
+}
+export default Test
+
+
+5)States in functional component using hooks
+
+ import React ,{useState}from 'react'
+import Test from './test'
+const App=()=>{
+    const [data,setData]=useState({name:'sannith',age:'25'})
+    const {name,age}=data//destructure
+
+
+    return(
+        <div>
+<center>
+    <h1> name is {name}</h1>
+    <h2> age is {age}</h2>
+    <Test name={name} age={age}/>
+</center>
+        </div>
+    )
+}
+export default App
+
+
+in test.js
+
+import React from 'react'
+
+const Test=(props)=>{
+        
+        return(
+    
+
+        <div>
+            <center>
+                <h1>this is functional test Component</h1>
+                <h1> welcome {props.name} </h1>
+                <h2> age : {props.age}</h2>
+            
+            </center>
+        </div>
+    )
+    
+}
+
+export default Test
+
+output:
+
+name is sannith
+age is 25
+this is functional test Component
+welcome sannith
+age : 25
+
+6)event handlers 3
+
+onClick, onChange, onSubmit
+
+onClick=>
+import React ,{useState}from 'react'
+
+const App=()=>{
+    return(
+        <div>
+<center>
+    <button onClick={()=>alert('button clicked succesfully')}>click here</button>
+</center>
+        </div>
+    )
+}
+export default App
+
+onChange=>
+
+import React ,{useState}from 'react'
+
+const App=()=>{
+    const [name,setName]= useState('')
+    return(
+        <div>
+<center>
+    <h1>Name :{name}</h1>
+    <input type='text' name='name' onChange={(e)=>setName(e.target.value)}/>
+</center>
+        </div>
+    )
+}
+export default App
+
+onSubmit==>
+
+import React ,{useState}from 'react'
+
+const App=()=>{
+    const [data,setData]= useState({email:'',password:''})
+     const changeHandler=(e)=>{
+        setData({...data,[e.target.name]:e.target.value})
+    }
+    const submitHandler=(e)=>{
+  e.preventDefault()
+  console.log(data)
+    }
+    return(
+        <div>
+<center>
+   <form onSubmit={submitHandler}>
+    <label>Email</label>
+    <input type='text' name='email' placeholder='Email' onChange={changeHandler}/><br/>
+    <label>Password</label>
+    <input type='password' name='password' placeholder='password' onChange={changeHandler}/><br/>
+    <input type='submit' value='login'/>
+
+   </form>
+</center>
+        </div>
+    )
+}
+export default App
+
+7)form handling and form validation
+
+ const submitHandler=(e)=>{
+  e.preventDefault()
+  if(data.password.length<5)
+  {
+    alert('please enter a password more than 5 characters')
+  }else{
+  console.log(data)
+  }
+    }
+
+8)reusable components
+
+import React from 'react'
+import Imge from './img'
+
+const App=()=>{
+    const arr=['https://i.ibb.co/Y3DyxWq/basmati.png','https://i.ibb.co/Y3DyxWq/basmati.png','https://i.ibb.co/Y3DyxWq/basmati.png']
+  
+    return(
+        <center>
+        <div>
+            {arr.map((item,index)=><Imge key={index} src={item}/>)}
+          
+        </div>
+        </center>
+    )
+}
+export default App
+
+
+in img.js
+
+const Imge=(props)=>{
+    return(
+        <div  style={{display:"inline"}}>
+              <img src={props.src} height={150} width={150} alt='1st person'/>
+           
+        </div>
+    )
+}
+export default Imge
+
+9)lifecycle methods  in class components
+
+ //1) componentDidMount()//
+
+=>called only once componet is rendered
+=>api calss integrated here
+=>it is immediate action next to render
+
+//2)compopnentDidUpdate()//
+=>called when  ever component is updated
+=>i.e when ever states or values are upadted
+
+//3)componentWillUnmount()//
+=>it is called before component is deleted or removed from dom
+=>Action deleted or component deleted
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//react router 6/////
+
+import React from 'react';
+import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import Home from './home';
+import Search from './search';
+import About from './about';
+
+function App() {
+  return(
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Home/>}></Route>
+      <Route path='/search' element={<Search/>}></Route>
+      <Route path='/about' element={<About/>}></Route>
+    </Routes>
+    </BrowserRouter>
+  ) 
+}
+
+export default App;
+
+///url parameters///
+1)path params
+2)query params
+
+//path params//
+
+ <Route path='/about/:name' element={<About/>}></Route>
+ <Link to='/about/sannith' className="Link">About page</Link>
+
+//query params//
+
+<Route path='/about' element={<About/>}></Route>
+ <Link to='/about?name=sannith' className="Link">About page</Link>
+
+
+//path params//
+
+ const name='santhu'
+ <Link to={`/about/${name}`} className="Link">About page</Link>
+
+in about.js
+import useParams
+ const params=useParams()
+<h1>name :- {params.name}</h1>
+
+//queryparams//
+
+ <Link to={`/search/?user=${name}&age=${age}`} className="Link">Search page</Link>
+
+in search.js
+
+import {useLocation} from "react-router-dom"
+
+const {search}=useLocation()
+    const params= new URLSearchParams(search)
+    console.log(search)
+
+ <h1>name:{params.get('user')}</h1>
+            <h1>age:{params.get('age')}</h1>
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////HOC////////
+higher order component is used for re-using component logic
+def: it will take a component and return new component
+
+
+import React from 'react';
+const Hoc=(Component)=>{
+    return(
+
+    class extends  React.Component{
+        state={
+            auth:true
+        }
+        render(){
+            return(
+                <div>
+                    {this.state.auth ? <Component name='sannith'/> : <h1> please login</h1>}
+                </div>
+            )
+        }
+
+    }
+    )
+}
+ export default Hoc
+
+
+
+import Hoc from "./Hoc";
+
+function App(props) {
+  return (
+    <div>
+      <h1> welcome user! {props.name}:)</h1>
+    </div>
+   
+  )
+}
+
+export default Hoc(App);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///Handling API Data//////
+
+
+using useEffectHook and fetch 
+
+import useEffect from  'react';
+const count=0;
+useEffect(()=>{},[count])
+here 2nd parameter is depency  it will  repeat untill count increases
+else only one time
+
+useEffect(()=>{
+                           fetch('url').then(response=>response.json()).then(json=>console.log(json))},[])
+
+///storeing data in firebase db from react component//
+
+import React,{useState} from 'react';
+function App() {
+  const [data,setData]=useState({
+    name:'',
+    age:''
+  })
+  const changeHandler=(e)=>{
+    setData({...data,[e.target.name]:e.target.value})
+  }
+  const submithandler= e =>{
+    e.preventDefault();
+    fetch('https://test-api-e5baa-default-rtdb.firebaseio.com/data.json',{
+      method:'POST',
+      body:JSON.stringify(data),
+      headers:{
+       "contentType" : "application/json;charset=utf-8"
+      }
+    }).then(res=>alert('data posted succesfully')).catch((err)=> console.log(err))
+
+  }
+  return (
+    <div>
+      <center>
+      <form onSubmit={submithandler}>
+        <label>name</label><br/>
+        <input type='text' name='name' onChange={changeHandler}/><br/>
+        <label>age</label><br/>
+        <input type='text' name='age' onChange={changeHandler} /><br/>
+        <input type='submit' value='submit' />
+
+      </form>
+      </center>
+    </div>
+  )
+
+}
+
+export default App;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CRUD operators
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Context API
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///React-Redux///
+
+npm i redux
+npm i react-redux
+npm i reduc-thunk
+npm i redux-devtools-extension
+
+redux contains 4 components
+reactcomponent,store,actioncreators,reducers
+
+=>all the state values are stored in store
+=>to acces the state value in react component  we need reducer to interact with store
+=>if we want to modify the state value from react component-->-->actioncraetor-->reducer-->store
+
+//store//
+in store.js
+
+import { createStore, applyMiddleware } from 'redux'
+
+import thunk from 'redux-thunk';
+import reducer from './Reducers';
+import { composeWithDevTools} from 'redux-devtools-extension';
+const middleware=[thunk];
+const store=createStore(reducer,composeWithDevTools(applyMiddleware(...middleware)))
+export default store;
+
+//reducers//
+reducer1.js
+const initalState={
+    name:'sachin',
+    score:95
+
+}
+export default function reducer1Reducer(state=initalState,action){
+    const {type,payload}=action;
+    switch(type){
+        case 'inc_player1_score':
+        return {...state, score:state.score+1}
+        case 'dec_player1_score':
+        return{...state, score:state.score-1}
+        case 'inc_player1_scorebyvalue':
+            return{...state, score:state.score+payload}
+        default:
+            return state;
+    }
+
+}
+
+
+reducer2.js
+
+const initalState={
+    name:'dhoni',
+    score:95
+
+}
+export default function reducer2Reducer(state=initalState,action){
+    const {type}=action;
+    switch(type){
+        case 'inc_player2_score':
+        return{...state, score:state.score+1}
+        case 'dec_player2_score':
+        return{...state, score:state.score-1}
+        default:
+            return state;
+    }
+
+}
+
+//index.js in reducers to combine reducers//
+
+import { combineReducers } from 'redux'
+import reducer1Reducer from './reducer1';
+import reducer2Reducer from './reducer2';
+const reducer=combineReducers({
+    reducer1:reducer1Reducer,
+    reducer2:reducer2Reducer
+})
+export default reducer
+
+////Actions//
+
+export const incplayerOneScore=()=>async dispatch=>{
+    dispatch({
+        type:'inc_player1_score'
+    })
+}
+export const decplayerOneScore=()=>async dispatch=>{
+    dispatch({
+        type:'dec_player1_score'
+    })
+}
+export const incplayerOneScoreByValue=(value)=>async dispatch=>{
+    dispatch({
+        type:'inc_player1_scorebyvalue',
+        payload: value
+    })
+}
+export const incplayerTwoScore=()=>async dispatch=>{
+    dispatch({
+        type:'inc_player2_score'
+    })
+}
+export const decplayerTwoScore=()=>async dispatch=>{
+    dispatch({
+        type:'dec_player2_score'
+    })
+}
+
+
+//main index.js//
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import store from './store';
+import { Provider } from 'react-redux';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+    <App />
+    </Provider>
+   
+  </React.StrictMode>
+);
+
+//finally app componet//
+
+import React from 'react';
+import { connect } from "react-redux";
+import{incplayerOneScore,decplayerOneScore,incplayerOneScoreByValue} from './Actions'
+import{incplayerTwoScore,decplayerTwoScore} from './Actions'
+function App({player1,player2,incplayerOneScore,decplayerOneScore,incplayerTwoScore,decplayerTwoScore,incplayerOneScoreByValue}) {
+  return (
+    <div >
+      <h1> hello</h1>
+      <h2>player one details</h2>
+      <p>name:{player1.name} & score: {player1.score}</p><br/>
+      <button onClick={()=>incplayerOneScore()}>increement</button>
+      <button onClick={()=>incplayerOneScoreByValue(6)}>increement+6</button>
+      <button onClick={()=>decplayerOneScore()}>decrement</button>
+      <h2>player two details</h2>
+      <p>name:{player2.name} & score: {player2.score}</p><br/>
+      <button onClick={()=>incplayerTwoScore()}>increement</button>
+      <button onClick={()=>decplayerTwoScore()}>decrement</button>
+      
+    </div>
+  );
+}
+const mapStateToProps=state=>({
+  player1:state.reducer1,
+  player2:state.reducer2
+})
+
+export default connect(mapStateToProps,{incplayerOneScore,decplayerOneScore,incplayerTwoScore,decplayerTwoScore,incplayerOneScoreByValue}) (App);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
