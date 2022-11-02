@@ -824,6 +824,148 @@ CRUD operators
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Context API
+
+=>using this features data or state value can be shared to multiple components.(without using props)
+
+
+//App.js//
+import ComponentA from "./Components/componentA";
+import ComponentB from "./Components/componentB";
+import { useState } from "react";
+import { createContext } from "react";
+ export const store=createContext()
+function App() {
+  
+  const [data,setData]=useState(0);
+  
+  return (
+    <store.Provider value={[data,setData]}>
+      <center>
+      <h1> hello</h1>
+      <ComponentA />
+      <ComponentB  />
+      <button onClick={()=>setData(data+1)}> increement</button>
+      </center>
+    </store.Provider>
+    
+     
+  )
+}
+
+export default App;
+
+//componetA//
+import { useContext } from "react";
+import { store } from "../App";
+const ComponentA=()=>{
+    const [data,setData]=useContext(store)
+    return(
+        <div className='card'>
+                <div className='card-body'>
+                componentA  {data}
+                </div>
+        </div>
+    )
+}
+export default ComponentA
+//componentB//
+import { useContext } from "react";
+import { store } from "../App";
+const ComponentB=()=>{
+    const [data,setData]=useContext(store)
+    return(
+        <div className='card'>
+        <div className='card-body'>
+        componentB  {data}
+        </div>
+</div>
+    )
+}
+export default ComponentB
+
+//project on  contextApi//
+import Display from "./displayComponent";
+import Count from "./countComponent";
+import { useState } from "react";
+import { createContext } from "react";
+ export const store=createContext()
+function App() {
+  
+  const [data,setData]=useState([
+    {
+      brandName:"Nokia"
+    },
+    {
+      brandName:'LG'
+    },
+    {
+      brandName:'Google'
+    }
+  ]);
+ 
+  
+  return (
+    <store.Provider value={[data,setData]}>
+      <center>
+      <h1> hello</h1>
+      <Count/>
+      <Display/>
+    
+      
+      </center>
+    </store.Provider>
+    
+     
+  )
+}
+
+export default App;
+
+//countComponent//
+
+import { useContext } from "react";
+import { store } from "./App";
+const Count=()=>{
+    const [data]=useContext(store)
+    return(
+        <div className='card'>
+                <div className='card-body'>
+                <h3 className="card-title">{data.length}</h3> 
+                </div>
+        </div>
+    )
+}
+export default Count
+
+//displayComponent//
+
+import { useContext,useState } from "react";
+import { store } from "./App";
+const Display=()=>{
+    const [data,setData]=useContext(store)
+    const [name,setName]=useState('')
+    const submitHandler=e=>{
+        e.preventDefault();
+        setData([...data,{brandName:name}])
+    }
+    return(
+        <div className='card'>
+                <div className='card-body'>
+                {data.map((items)=><h3 className="card-title">{items.brandName}</h3>)}
+                <form className="form" onSubmit={submitHandler}>
+                    <input type="text" onChange={(e)=>setName(e.target.value)}/>
+                    <input type="submit" value='add' />
+                </form>
+    
+                
+                </div>
+        </div>
+    )
+}
+export default Display
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///React-Redux///
