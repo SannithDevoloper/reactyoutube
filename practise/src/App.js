@@ -1,36 +1,38 @@
-// import React from 'react';
-// import Login from './Components/login';
-// import Signup from './Components/signup';
-// import Home from './Components/home';
-// import {Routes,Route,BrowserRouter} from 'react-router-dom';
+import Header from "./header"
+import Display from "./display"
 
-import Count from "./count";
-import IncDec from "./incdec";
-import {useState} from 'react'
+import Footer from "./footer"
+import JSON from './Components/db.json'
+ import {useState} from 'react'
+ 
+
 const App=()=>{
-  const [data,setData] = useState(0)
-  const funInc=()=>{
-    setData(data+1);
+  const [data,setData]=useState(
+    {
+      prodData:JSON,
+      filterdData: JSON,
+    }
+  )
+  const filterData=(keyword)=>{
+    let output = data.prodData.filter((data)=>{
+      return  (data.name.toLowerCase().indexOf(keyword.toLowerCase())>-1)
+    })
+    setData({filterdData:output})
 
-}
-const funDec=()=>{
-  setData(data-1);
 
-}
+  }
+ 
   return(
-    <div>
-      <Count Data={data}/>
-      <IncDec funInc={funInc} funDec={funDec}/>
+    <div >
+      {/* <Header UserInput={(data)=>console.log('inside home',data)}/> */}
+      <Header UserInput={(data)=>filterData(data)}/>
+      <Display Data={data.filterdData}/>
+      
+      <Footer/>
+    
     
     </div>
      
-        // <BrowserRouter>
-        // <Routes>
-        //   <Route path='/' element={<Login/>}/>
-        //   <Route path='/signup' element={<Signup/>}/>
-        //   <Route path='/home' element={<Home/>}/>
-        // </Routes>
-        // </BrowserRouter>
         
       
   )
