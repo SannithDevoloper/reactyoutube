@@ -1,0 +1,17 @@
+1=>what is react?
+2=>what is jsx?
+3=>can we deovolop react app without jsx?
+4=>what is virtual DOM?
+5=>diff between Dom  and virtual Dom?
+6=>what is component?
+7=>what is state ?
+8=>what is prop?
+9=>how will you modefy state?
+10=>define life cycle methods?
+11=>defines hooks and what concepts of hooks you used?
+12=>what is HOC?
+13=>Redux?
+14=>what is prop drilling?
+15=>why state modification is required in react?
+16=>what is single page application?
+17=>what is error boundries?
