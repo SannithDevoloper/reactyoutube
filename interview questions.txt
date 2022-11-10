@@ -15,3 +15,6 @@
 15=>why state modification is required in react?
 16=>what is single page application?
 17=>what is error boundries?
+18=>what is hoisting in javascript?
+19=>what is crousal in javascript?
+20=>what is lazy loading?
