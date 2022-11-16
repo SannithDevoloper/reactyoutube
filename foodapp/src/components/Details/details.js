@@ -6,7 +6,7 @@ import 'react-tabs/style/react-tabs.css';
 import { Link } from 'react-router-dom';
 import MenuDisplay from './menuDisplay';
 
-const url = "http://zomatoajulypi.herokuapp.com/details"
+const url = "https://zomatoajulypi.herokuapp.com/details"
 const menuUrl = "https://zomatoajulypi.herokuapp.com/menu"
 class Details extends Component{
     constructor(){

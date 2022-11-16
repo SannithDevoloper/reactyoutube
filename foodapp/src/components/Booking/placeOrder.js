@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import './placeOrder.css';
 
 
-const url = "http://zomatoajulypi.herokuapp.com/menuItem";
+const url = "https://zomatoajulypi.herokuapp.com/menuItem";
 const placeOrder="http://localhost:9870/orders"
 
 class PlaceOrder extends Component{
