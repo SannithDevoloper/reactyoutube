@@ -1,23 +1,40 @@
+import { Fragment } from 'react';
+import { Component } from 'react';
 import './Components/home.css'
-import { useState } from 'react'
-const Header=(props)=>{
-    const [data,setData]=useState({
+
+class Header extends Component{
+    constructor(props) {
+      super(props)
+    
+      this.state = {
         keyword:''
-    })
-    const changeHandler=(e)=>{
-        setData({keyword:e.target.value?e.target.value:'Search '})
-        props.UserInput(e.target.value)
+      }
+    }
+    
+   
+     changeHandler=(e)=>{
+    
+        console.log(e.target.value);
+        this.setState({keyword:e.target.value?e.target.value:'Search '});
+        this.props.UserInput(e.target.value)
+     
 
     }
+    render(){
+
+    
     return(
+        <Fragment>
         <div className="h1">
             
             <center>
-            <input id="input" onChange={changeHandler}/>
-            <h1>{data.keywords} </h1>
+            <input type="text" onChange={this.changeHandler}/>
+            <h1>{this.state.keyword} </h1>
             </center>
            
         </div>
+        </Fragment>
     )
+    }
 }
 export default Header

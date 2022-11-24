@@ -1,6 +1,6 @@
 import './display.css'
 const Display=(props)=>{
-    const rendeProduct=props.Data.map((item)=>{
+    const renderProduct=props.Data.map((item)=>{
         return(
             <div className="card" key={item.id}>
                 <img src={item.image} alt={item.name}/>
@@ -17,7 +17,7 @@ const Display=(props)=>{
    
     
     return(
-        <div className='main'> {rendeProduct}</div>
+        <div className='main'> {renderProduct}</div>
           
         
     )

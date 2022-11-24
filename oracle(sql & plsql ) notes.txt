@@ -1,0 +1,427 @@
+SQL  =>
+
+Data Types:=>
+
+NUMBER -> 0-9
+CHAR -> A-Z
+VARCHAR -> 0-9,A-Z,special Characters,Static alocation of space
+VARCHAR2 -> 0-9,A-Z,special Characters,Dynamic alocation of spac
+TIME STAMP -> 01-12-2022 12:05:45
+LONG -> 2GB ( Only one column in table can be declared long)
+RAW -> Store images
+LONG RAW -> data files along with graphical images or vedios
+LOB
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+1)DDL (Data Defination Language):=>
+     CREATE:
+
+     syntax: create table <table_name>( col_name1 data type,col_name2 data type..........max limit of 1000 columns);
+   
+     create table student_application(ID   number,name   varchar2(240),mobile_number   number,email_id   varchar2     (100));
+
+      ALTER:
+         add,modify,rename,drop
+         add -> to add columnsin to existing table
+         modify -> to modify data type/size
+          rename -> to rename the column
+           drop -> to drop the columns from table
+
+     ADD:
+     Syntax: alter table <table_name> add (col1 datatype,col2 datatype)
+
+   Modify:
+    Syntax: alter table <table_name> modify  col_name  Data type(SIZE);
+
+   Rename:
+    Syntax: alter table <table_name> rename <old_columnname> to <new_column_name>
+
+   DROP:
+  Syntax: alter table <table_name> DROP  column<columnname> 
+
+
+rename table level:
+syntax: rename <old_table_name> to <new_table_name>
+
+drop table:
+syntax: drop table <table_name>
+
+    
+  Truncate:
+   syntax: truncate table <table_name>
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+2)DML (DATA MANUPLATION LANGUAGE) :==>
+     insert
+      update
+      delete
+   insert:
+    syntax: insert into <table_name> values( col1_val,col2_val,........)
+
+   update:
+    syntax: update <table_name> set<column_name>=<new_col_val>
+                 update <table_name> set<column_name>=<new_col_val> where filter
+                ex:    update student_info set corseFees='10000' where course='java'
+
+   Delete:
+ syntax: delete  from <table_name> where filter	
+ ex: delete from student_info where coursefees='not paid'
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+3)TCL(transaction control language):===>
+
+   commit
+   rollback
+   savepoint
+
+ commit:=
+   it is used to save data permanent in database
+ syntax: commit;
+
+
+  rollback:=
+    it is used to revert data back only in local storage not in database
+     syntax: rollback;
+
+   savepoint:=
+      to handel mutiple rollback it is uesd
+      syntax: savepoint s1;
+      rollback to s1;
+
+example:
+
+    =>insert data savepoint s1;
+   => update data savepoint s2;
+   =>delete data savepoint s3;
+
+after running all the commands ,then if we use rollback to s2,it will revert back data
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+4)DCL(data control language)==>
+    
+   grant =>give permission to other users on table
+   revoke=>cancel permission  from other users on table
+
+syntax:- grant <permissions> on <table_name> to <user_name>
+              revoke <permissions> on <table_name> from <user_name>
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+5)DQL(data query language)==>
+     select  -> columns names 
+     from    -> table names
+    where   -> filter condition 
+    group by -> summerize the data
+    having ->filter for summerized data
+    order by -> sort the data
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Operators in sql:==>
+  
+  Arthimatic -> +,-,*,/
+  Relational  ->  >,<,>=,<=,=,<>,!=
+  logical -> AND, OR ,NOT
+  set   -> union,union all,intersect,minus
+  special -> in,like,between,exists,any,all
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+insert all:=>
+ it is used to insert multiples rows at a time
+syntax: 
+ insert all
+ into <table_name1>values(............................)
+ into <table_name2>values(............................);
+
+
+create table with ref:=>
+   syntax: crerate <table_name> as  select * from <existing_table_name>
+
+copying data from one table to another table:=>
+    sybntax: insert  into <table_name> select * from <table_name>
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+and=> result it must satify both conditions
+or=>any either of them is true it returns true
+not=> not to been in result ex: not(empid=25)
+union=> combines the two tables but columns and datatypes should match (does not allows dubluicates)
+union all=> combines two tables also alows dublicates
+intersect => combines two tables and return only common data
+minus=> select empname from <table1>
+                 minus
+                 select empname from <table2>
+                 ex:
+         1)sannith     2)swaran
+            swaran         sailesh
+            sailesh          raj
+           raj                 santhosh
+
+    result:
+      sannith
+  => here return only data present in 1st table
+
+  in=>      select empname from table where deptno in(10,20,40,60)
+  like=>    select * from table where  empname like 's%';
+ between =>  select empname from table where sal between  5000 and 10000;
+ is  (it is always used for null values)=> select  * from table where sal is null;
+                                                                 select * from table where sal is not null;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   sql functions:==>
+     number
+      string
+      date
+      group
+      conversion
+/////////////////////////////////////////////////////////////////////////////////////
+
+///number functions///:=>
+  ABS=> abs(-100)=100
+               abs(100)=100
+  CEIL=>ceil(15.75)=16
+                ceil(15.01)=16
+   Floor=>floor(15.75)=15
+  sign=> sign(-100)=-1
+                sign(100)=1
+  mod=> mod(10,3)=1
+                mod(25,5)=0
+  sqrt => sqrt(25)=5
+ power => power(2,3)=8
+ least=> least(5,8,6,10)=5
+ greatest=> greatest(5,8,6,10)=10
+ sin,cos,tan=> sin(n)
+ round=> round(12.7895,2)=12.79
+ trunc=> trunc(12.7895,2)=12.78
+ nvl=>select sal+comm from table 
+           1000+null = null
+          to handle null values we use nvl
+          select sal+nvl(comm,0) from table(here o is default value)
+          1000+0= 1000
+nvl2=> select nvl2(55,0,1) from dual==0
+             select nvl2(null,0,1) from dual==1
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+ //String Functions///:=>
+    length=>length(str)
+                   length('sannith')=7
+   ascii=> ascii(str)
+                ascii('A')=65
+   chr=> chr(n)
+               chr(65)=A
+  concat=>concat(str1,str2....)
+                  concat('sannith','reddy')
+                 'sannith'||'reddy'
+  lower=>lower(str)
+                 lower('SANNITH')=sannith
+ upper=> upper(str)
+                upper('sannith')=SANNITH
+  initcap=>initcap('welcome to hyderabad')=Welcome To Hyderabad
+  ltrim=>ltrim(str,c)
+                ex:'         sannith'
+                        select ltrim('       sannith',' ') from dual=sannith
+   rtrim=>rtrim(str,c)
+                 
+                ex:'sannith@@@@@@'
+                        select ltrim('sannith',' @') from dual=sannith
+ trim=>syntax:trim(<c> from<str>)
+           ex:select trim('@' from '@sannith@@@@@')from dual=sannith
+ lpad:=> syntax:lpad(str,n,c)
+              ex:select lpad('123456789',10,'@') from dual=@123456789
+                      select lpad('123456789',4,'@') from dual=1234
+rpad:=>syntax:rpad(str,n,c)
+              ex:select rpad('123456789',10,'@') from dual=123456789@
+                   select rpad('123456789',4,'@') from dual=1234
+substr:=>syntax: substr(str,m,n ) m- from position  n-No.of characters
+                                   n is not manditory
+                 ex: select substr('sannithreddy',1,4) from dual=sann
+ instr:=>syntax: substr(str,c,m,n ) m- from position  n-No.of characters c- which char to be identified
+                             select instr('sannithredddy@gmail.com','@',1,1) from dual=14
+
+   ex: substr('sannithpeddolla143@gmail.com,1,instr('sannithpedddolla143@gmail.com','@',1,1)-1)
+
+translate:=>syn: translate(str,char,Tchar)
+                    ex:translate('sannith@gmail.com','n','b')=sabbith@gmail.com
+replace:=>syn:replace(str,<set of char>,<t set of char>)
+                      ex:replace('sannith@gmail.com','gmail','outlook')
+decode:=>syn:decode(<str>,<str1>,result1,<str2>,result2,<str3>,result3)
+                 ex:select decode(&country,'ind','india','us','united states','ge','germany','italy') from dual
+
+                           ind 
+                            result: india
+case:=>sync:case when <condition> then
+                                       result1
+                      case when <condition> then
+                                       result2
+                      case when <condition> then
+                                         result3
+                     else result4
+                     end
+                   ex:
+                        select case when :country in('us','usa') then
+                                            ' united states of america'
+                               when :country in('in','india') then
+                                           'INDIA'
+                      else 'no country '
+                     end "country name"
+                      from dual
+////////////////////////////////////////////////////////////////////////////////////////////
+///date functions///:==>
+  
+    sysdate  => select sysdate from dual  =23-11-22   (11 hrs behind the current_date)
+    current_date=> select current_date from dual=23-11-22
+    add_months=>sync: add_months(date,n)
+                             ex: select add_months(sysdate,10) from dual=23-09-23
+     extract=> syn:extract(day/month/year from date)
+                         ex: select extract(day from sysdate )from dual=23
+    monts_between=>  SELECT MONTHS_BETWEEN('01-01-2022', sysdate) FROM dual;
+     last_day=> syn: last_day(date)
+                            SELECT last_day(sysdate) from dual;=30
+   next_day=> syn"next_day(date,day)
+                             select next_day(sysdate,'thursday') from dual;=24/11/22
+  
+
+
+       select next_day(last_day(sysdate),'thursday') from dual;=01/12/22
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//group functions//:==>
+ count=> select count(*) from <table name>
+                select count(empid)  from emp
+
+                  select  depno,count(empno) from employee  group by deptno;
+ min=>    select min(sal) from emp;
+ max=>   select max(sal) from emp;
+ sum=> select deptno,job,sum(sal) from dual group by  deptno,job order by deptno
+ avg=>sum(sal)/count(empno)
+             select avg(sal) from emp;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//coversion functions//:=>
+
+  to_char=> convert date/number to char
+
+                              select to_char(sysdate,'d') from dual=5
+                               select to_char(sysdate,'dd') from dual=24
+                               select to_char(sysdate,'ddd') from dual=328
+                               select to_char(sysdate,'dy') from dual=thu
+                               select to_char(sysdate,'day') from dual=thursday
+                               select to_char(sysdate,'mm') from dual=11
+      	              select to_char(sysdate,'mon') from dual=nov
+                               select to_char(sysdate,'month') from dual= november
+                               select to_char(sysdate,'year') from dual=twenty twenty-two
+                               select to_char(sysdate,'y') from dual=2
+                                 select to_char(sysdate,'yy') from dual=22
+                                select to_char(sysdate,'yyy') from dual=022
+                                select to_char(sysdate,'yyyy') from dual=2022
+                               select to_char(sysdate,'hh') from dual=10
+                               select to_char(sysdate,'hh24') from dual=10
+                              select to_char(sysdate,'mi') from dual=16
+                              select to_char(sysdate,'ss') from dual=30 (sec of minutes)  
+                              select to_char(sysdate,'ssss') from dual=3030(sec since starting of day)
+                              select to_char(sysdate,'w') from dual=4
+                                select to_char(sysdate,'ww') from dual=47
+                                  select to_char(sysdate,'www') from dual=474
+                               select to_char(sysdate,'wwww') from dual=4744
+
+
+  to_date=>used to convert data values of character data types such as VARCHAR, NVARCHAR, CHAR etc. to standard DATE data type.
+
+                              select to_date('05-nov-2022','dd-mm-yyyy') from dual
+  to_number=>convert char to number
+                            select  TO_NUMBER('$456.12','L999.99') from dual=456.12
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//constraints//:==>
+
+  unique=> values must me unique i.e not repeated 
+  notnull=> values must be assigned compulsory
+  primarykey=>(unique plus not null)
+ composite primary key=>   empid based on deptno in such case we prefer composite key
+
+             ex:primary key(empno,depno)
+       1 sannith 10
+       2 swaran 10
+      3 santosh 10
+    
+     1 raj        20 
+     2 sailesh 20
+ check=>  check(sal>1000)
+                  if we insert sal below 1000 it will decline
+ default=> provide default value for column instead of null
+ foreignkey/ref key=>
+
+                        in emp table    deptno column is  refered from  dep table
+                            references department(deptno)
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//joins///:=>
+  equi join=>
+                       select * from emp e,dept d where e.deptno=d.deptno
+  non-equi join=>
+                     select * from emp e,dept d where   not( e.deptno=d.deptno)
+                           select * from emp e,dept d where   e.deptno!=d.deptno
+  cartesain/cross join=>
+                      SELECT * FROM [TABLE1] CROSS JOIN [TABLE2]
+                                                 OR
+                     SELECT * FROM [ TABLE1] , [TABLE2]
+  natural join=>
+                      select * from emp  natural join dept
+                      note: it is similar to equal join but it doesnot allow dublicate column i.e only one deptno displays in output
+   innerjoin=>
+                       select * from emp e  inner join dept d on (e.deptno=d.deptno)
+   outer join====>
+    left outer join=> entire data from left and only matching data from right
+                      select * from emp e ,dept d where e.deptno=d.deptno(+)
+                                                        or
+                       select * from emp e left join dept d on(e.deptno=d.deptno)
+
+    right outer join=> entire data from right and matching data from left
+                     select * from emp e ,dept d where e.deptno(+)=d.deptno
+                                              or
+                        select * from emp e right join dept d on(e.deptno=d.deptno)
+    full outer join=>display entire data
+                           select * from emp e full outer join dept d on(e.deptno=d.deptno)
+  self join==>
+                 select e.mgr,e.ename,e2.empno from emp e, emp e2 where(e.mgr=e2.empno)
+                                                 or
+                   select e.mgr,e.ename,e2.empno from emp e self join emp e2 on(e.mgr=e2.empno)
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///Sub Queries///:=>
+simple sub query==>
+            select * from emp where sal=(select max(sal) from emp)
+             select * from emp where sal in(select sal from  emp where sal>2000)
+
+              select * from emp where (deptno,sal)in(select deptno,max(sal) from emp group by deptno)
+
+note: herec oracle engine will execute 1st inner query then later outer query
+                      select max(sal),deptno from emp   where
+                       sal  not in(select max(sal) from emp group by deptno)
+                     group by deptno
+
+   co-related sub query==>
+ herec inner query is dependent upon outer query
+     ex:
+     select * from emp e where 
+            1=(select count(*) from emp e1 where e1.sal>=e.sal)
+
+
+   select * from emp e where exists(
+    select  empno from emp e1 where e1.mgr=e.empno)
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//psuedo columns///==>
+ uid=> select uid from dual
+ user=> select user from dual
+
+      
+
+
+                   
+
+          
+
+           
+
+
+
+
+
+
+
+ 
+         
+   

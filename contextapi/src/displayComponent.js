@@ -7,10 +7,18 @@ const Display=()=>{
         e.preventDefault();
         setData([...data,{brandName:name}])
     }
+    const deleteHandler=(e,{brandName})=>{
+        e.preventDefault();
+        const newList=data.filter((item)=>item.brandName!== brandName)
+        setData(newList)
+
+       
+    }
     return(
         <div className='card'>
                 <div className='card-body'>
-                {data.map((items)=><h3 className="card-title">{items.brandName}</h3>)}
+                {data.map((items)=><h3 className="card-title">{items.brandName}   <button onClick={deleteHandler}>delete</button></h3>)}
+             
                 <form className="form" onSubmit={submitHandler}>
                     <input type="text" onChange={(e)=>setName(e.target.value)}/>
                     <input type="submit" value='add' />
