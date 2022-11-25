@@ -406,6 +406,174 @@ note: herec oracle engine will execute 1st inner query then later outer query
 //psuedo columns///==>
  uid=> select uid from dual
  user=> select user from dual
+ rownum=> generating sequence
+            select rownum,e.* from emp e
+ rowid=> get id for rows
+           select ROWID,e.* from emp e
+
+ inline===>
+   select d.dname,d.loc,e.empno,e.ename,e.sal from    dept d,
+   (select e.* from emp  e  order by sal  desc)e
+    where d.deptno=e.deptno  ;
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///scalar//:==>
+   1.scalar query should have  single column
+  2.scalar query  should always return single value,it returns  error if
+syn:
+    select 
+     (select  <col_name> from <table>)col_name
+   from<table>
+
+ex:
+     select dname,loc,
+     (select max(sal) from emp e where e.deptno=d.deptno)max_sal
+     from dept d
+
+
+ //heirarchical queries//:==>
+  
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//synonyms//:==>
+
+it is used to create synonys names to table it is used in purpose of grant users only for dml not ddl
+
+ ex: emp  <table_name>
+       emp_info <synonym name> 
+
+  grant all to a,b,c
+ alter table add <col>  here with table it is possible to alter(ddl)
+    
+ grant  all on  emp_info  to a,b,c (here with synonym it is  not possible to alter(ddl) only posible for dml)
+
+
+ public=
+    create public  synonym  <syn_name>for <table_name>
+    create public  synonym   emp_info for  emp
+private=
+   create   synonym  <syn_name>for <table_name>
+    create   synonym   emp_info for  emp
+     grants all on  emp_info  to apps;
+
+ to drop synonym=>
+    drop synonym <synonym_name>
+
+
+///views//:===>
+
+   simple=>   create view  <view name> as <select statement>
+                     create view  emp_simple as select  * from emp;
+   complex=>creating view based on multiple tables
+                      create view  emp_simple as select  e. ename,e.empno,d.deptno,d.loc from emp e, dept d where  e.deptno=
+                         d.deptno;
+         
+  inline=> view on top of inline query is called inline view
+   readonly=> view created only for read or extract but not to modified
+                        create view  emp_simple as select  * from emp  with read only;
+  horizontal=> create view  emp_hoz as select  empno,ename, job,hiredate from emp
+  vartical=>create view emp_accounting  as select * from emp  where deptno=10;
+  materialized=> this view as it own structure and it will be stored in db
+                           if any changes happen in tables then it will also updated in materialized view
+                      create materialized view  emp_demo  as  select  e. ename,e.empno,d.deptno,d.loc from emp e, dept d                                where  e.deptno= d.deptno;
+  force=>  create   view  emp_sales  as select * from dummy
+    
+
+ to replace or change view=>
+    craete or replace  view  emp_accounting  as   select * from emp  where deptno=10;
+
+ to drop view=>
+      drop view <view_name>
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  ///sequences////=>
+
+   create sequence <seq_name>
+<staet with first_number>
+<increment by interel>
+<MAXALUE maxvalue | NOMAXVALUE>
+<MINVALUE minvalue |NOMINVALUE>
+<cycle|nocycle>
+<CACHE  cache_size |NOCACHE>
+     ex:
+          create SEQUENCE xx_emp start with 1 increment by 2  maxvalue 1000 cycle cache 2;
+ 
+ select   xx_emp.nextval from dual
+ select   xx_emp.curval from dual
+
+
+drop  sequence <seq_name>
+
+
+
+insert into emp(empno,ename,job) values(xx_emp.nextal,'santhu','developer');
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//rollup and cube//:=>
+   rollup:=>
+    select deptno,job,sum(sal) from emp group by rollup(deptno,job) order by deptno asc;
+
+
+cube:=>
+     select deptno,job,sum(sal) from emp group by cube(deptno,job) order by deptno asc;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//rank and denserank//:==>
+    rank:=>
+     rank() over([partition  expression ][order by expression])
+
+ ex: select ename,job,sal,rank() over(order by sal desc)as sal_rank from emp
+
+   for 2nd rank
+   select * from(select ename,job,sal,rank() over(order by sal desc)as sal_rank from emp) where sal_rank=2
+
+ return 2 results having samesal3000
+   
+
+ with partition
+   select ename,job,sal,deptno,rank() over(PARTITION by deptno order by sal desc)as sal_rank from emp
+
+    dense rank=>
+     ex:
+   select ename,job,sal,deptno,dense_rank() over( order by sal desc)as sal_rank from emp
+
+    select ename,job,sal,deptno,dense_rank() over(PARTITION by deptno order by sal desc)as sal_rank from emp
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//lag and lead//:==>
+
+lag=> gets previous record
+lead=> gets next record
+   ex:
+   select ename,sal,lag(sal)over(order by sal),lead(sal)over(order by sal) from emp 
+  if we need 3rd pevious or next record:
+    select ename,sal,lag(sal,3)over(order by sal),lead(sal,3)over(order by sal) from emp
+
+
+//indexes//:==>
+  indexes are used to increase the performance of query
+    ex: select * from emp where sal>=200
+
+ here in filter it will compare with rowid if we go with index and this increases the performance of query
+
+note: when column is defined as primary constraint it willbe create default 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+              
 
       
 
