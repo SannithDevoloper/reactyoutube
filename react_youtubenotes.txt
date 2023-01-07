@@ -620,7 +620,7 @@ const App=()=>{
     return(
         <center>
         <div>
-            {arr.map((item,index)=><Imge key={index} src={item}/>)}
+            {arr.map((item,index)=><Img key={index} src={item}/>)}
           
         </div>
         </center>
@@ -793,7 +793,7 @@ function App() {
   const submithandler= e =>{
     e.preventDefault();
     fetch('https://test-api-e5baa-default-rtdb.firebaseio.com/data.json',{
-      method:'POST',
+      method:'POST', 
       body:JSON.stringify(data),
       headers:{
        "contentType" : "application/json;charset=utf-8"

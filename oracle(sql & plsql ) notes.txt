@@ -573,6 +573,38 @@ note: when column is defined as primary constraint it willbe create default
 
 
 
+                                                PL/SQL:=====>
+
+
+Procedure language / standard query language
+  here we can execute multiple statements based on conditions at once
+
+=>they are two types of blocks in plsql
+ 1)anonymous block
+ 2)named block
+
+prototype of anonymous block:=
+         DECLARE
+           declare  statements
+        BEGIN
+           Executable statements
+       Ecxeptions
+          Execption  handling statements
+      END;
+
+       DECLARE
+           name varchar2(30);
+
+        BEGIN
+           name:='sannith';
+          dbms_output.put_line(name);
+      END;
+
+
+
+
+
+
               
 
       
